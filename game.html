@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-C-A Game</title>
+    
+    <style>
+        /* --- Basic Setup --- */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #004a99;
+        }
+
+        /* --- Game Board --- */
+        /* This is the main container that holds all the category columns */
+        #game-board {
+            display: flex; /* This is the key! It lines up our columns. */
+            flex-direction: row; /* Aligns columns side-by-side */
+            justify-content: center; /* Centers the columns on the page */
+            gap: 15px; /* Adds a nice space between each column */
+            margin-top: 30px;
+        }
+
+        /* --- Category Column --- */
+        /* This is a single vertical column (e.g., "5.1 Algebra") */
+        .category-column {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            width: 200px; /* All columns have a fixed width */
+            padding-bottom: 10px;
+            flex-shrink: 0; /* Prevents columns from shrinking */
+        }
+
+        .category-header {
+            background-color: #004a99; /* Dark blue header */
+            color: white;
+            padding: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 8px 8px 0 0; /* Rounded top corners */
+        }
+        
+        /* --- Level Buckets (🌶, 🌶🌶, 🌶🌶🌶) --- */
+        /* This is the container for each difficulty level */
+        .level-bucket {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 6px;
+        }
+
+        /* This is the header for the bucket (e.g., "🌶🌶🌶") */
+        .level-header {
+            font-size: 1.5em; /* Big spicy peppers! */
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        /* Color-coding the buckets! */
+        .level-a { background-color: #c93434; } /* Red */
+        .level-c { background-color: #347ac9; } /* Blue */
+        .level-e { background-color: #34c95a; } /* Green */
+        
+        /* --- Question Buttons --- */
+        /* This container holds the grid of question buttons */
+        .question-grid {
+            display: flex;
+            flex-wrap: wrap; /* Allows buttons to wrap to the next line */
+            justify-content: center;
+            gap: 8px; /* Space between buttons */
+        }
+        
+        .question-button {
+            width: 50px;
+            height: 50px;
+            background-color: #f0f0f0;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .question-button:hover {
+            background-color: #e0e0e0;
+            border-color: #aaa;
+        }
+
+        /* This style will be added by JavaScript when a question is used */
+        .question-button.disabled {
+            background-color: #999;
+            color: #777;
+            cursor: not-allowed;
+            border-color: #888;
+        }
+
+        /* We can add the team/scoring UI later below the board */
+        #team-section {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>My E-C-A Review Game</h1>
+
+    <div id="game-board">
+        
+        <div class="category-column">
+            <div class="category-header">
+                5.1 Functions
+            </div>
+            
+            <div class="level-bucket level-a">
+                <div class="level-header">🌶🌶🌶</div>
+                <div class="question-grid">
+                    <button class="question-button">1</button>
+                    <button class="question-button">2</button>
+                </div>
+            </div>
+
+            <div class="level-bucket level-c">
+                <div class="level-header">🌶🌶</div>
+                <div class="question-grid">
+                    <button class="question-button">1</button>
+                </div>
+            </div>
+
+            <div class="level-bucket level-e">
+                <div class="level-header">🌶</div>
+                <div class="question-grid">
+                    <button class="question-button">1</button>
+                    <button class="question-button">2</button>
+                    <button class="question-button">3</button>
+                    <button class="question-button">4</button>
+                </div>
+            </div>
+        </div>
+        <div class="category-column">
+            <div class="category-header">
+                5.2 Algebra
+            </div>
+            
+            <div class="level-bucket level-a">
+                <div class="level-header">🌶🌶🌶</div>
+                <div class="question-grid">
+                    </div>
+            </div>
+
+            <div class="level-bucket level-c">
+                <div class="level-header">🌶🌶</div>
+                <div class="question-grid">
+                    <button class="question-button">1</button>
+                    <button class="question-button">2</button>
+                </div>
+            </div>
+
+            <div class="level-bucket level-e">
+                <div class="level-header">🌶</div>
+                <div class="question-grid">
+                    <button class="question-button">1</button>
+                    <button class="question-button">2</button>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    <div id="team-section">
+        </div>
+
+    <div id="question-modal" style="display: none;">
+        </div>
+
+
+    <script>
+        // We will start writing our logic here in the next step!
+        
+        // 1. Define allQuestions array
+        // 2. Define categoriesForThisGame array
+        // 3. Write a function to build the board dynamically
+        // 4. Add logic for clicking buttons
+
+    </script>
+
+</body>
+</html>
