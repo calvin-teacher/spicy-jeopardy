@@ -19,9 +19,91 @@
             color: #004a99;
         }
 
+        /* --- Team Setup Screen --- */
+        #team-setup {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        #team-setup h2 {
+            margin-top: 0;
+            color: #004a99;
+        }
+        #team-names-input {
+            width: 90%;
+            height: 100px;
+            padding: 10px;
+            font-size: 1em;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        #start-game-btn {
+            background-color: #34c95a; /* Green */
+            color: white;
+            padding: 12px 25px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        #start-game-btn:hover {
+            background-color: #2aaa4c;
+        }
+
+        /* --- Team Scoreboard --- */
+        #team-display {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px auto 40px auto;
+            flex-wrap: wrap;
+        }
+        .team-score-card {
+            background-color: #fff;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            text-align: center;
+            min-width: 150px;
+        }
+        .team-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #004a99;
+            margin: 0 0 5px 0;
+        }
+        .team-score {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #333;
+            margin: 0;
+        }
+        
+        /* --- NEW: Game Controls Area --- */
+        #game-controls {
+            display: none; /* Hidden until game starts */
+            text-align: center;
+            margin: -20px 0 30px 0;
+        }
+        #download-csv-btn {
+            background-color: #555;
+            color: white;
+        }
+        #download-csv-btn:hover {
+            background-color: #333;
+        }
+
+
         /* --- Game Board --- */
         #game-board {
-            display: flex;
+            display: none; /* Hidden by default */
             flex-direction: row;
             justify-content: center;
             gap: 15px;
@@ -29,341 +111,69 @@
             flex-wrap: wrap; 
         }
 
-        /* --- Category Column --- */
-        .category-column {
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            width: 200px;
-            padding-bottom: 10px;
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: column; 
-        }
-        .category-header {
-            background-color: #004a99;
-            color: white;
-            padding: 15px;
-            font-size: 1.2em;
-            font-weight: bold;
-            text-align: center;
-            border-radius: 8px 8px 0 0;
-        }
-        
-        /* --- Level Buckets (🌶, 🌶🌶, 🌶🌶🌶) --- */
-        .level-bucket {
-            padding: 10px;
-            margin: 10px;
-            border-radius: 6px;
-            flex: 1; 
-            display: flex;
-            flex-direction: column;
-        }
-        .level-header {
-            font-size: 1.5em;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 10px;
-            color: white;
-        }
-        .level-a { background-color: #c93434; } /* Red */
-        .level-c { background-color: #347ac9; } /* Blue */
-        .level-e { background-color: #34c95a; } /* Green */
-        
-        /* --- Question Buttons --- */
-        .question-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-            flex-grow: 1; 
-            align-content: flex-start;
-        }
-        .question-button {
-            width: 50px;
-            height: 50px;
-            background-color: #f0f0f0;
-            border: 2px solid #ccc;
-            border-radius: 5px;
-            font-size: 1.1em;
-            font-weight: bold;
-            color: #555;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .question-button:hover:not(.disabled) {
-            background-color: #e0e0e0;
-            border-color: #aaa;
-        }
-        .question-button.disabled {
-            background-color: #999;
-            color: #777;
-            cursor: not-allowed;
-            border-color: #888;
-            opacity: 0.6;
-        }
+        /* ... (All the .category-column, .level-bucket, .question-button styles are identical) ... */
+        .category-column { background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); width: 200px; padding-bottom: 10px; flex-shrink: 0; display: flex; flex-direction: column; }
+        .category-header { background-color: #004a99; color: white; padding: 15px; font-size: 1.2em; font-weight: bold; text-align: center; border-radius: 8px 8px 0 0; }
+        .level-bucket { padding: 10px; margin: 10px; border-radius: 6px; flex: 1; display: flex; flex-direction: column; }
+        .level-header { font-size: 1.5em; font-weight: bold; text-align: center; margin-bottom: 10px; color: white; }
+        .level-a { background-color: #c93434; } .level-c { background-color: #347ac9; } .level-e { background-color: #34c95a; }
+        .question-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; flex-grow: 1; align-content: flex-start; }
+        .question-button { width: 50px; height: 50px; background-color: #f0f0f0; border: 2px solid #ccc; border-radius: 5px; font-size: 1.1em; font-weight: bold; color: #555; cursor: pointer; transition: all 0.2s ease; }
+        .question-button:hover:not(.disabled) { background-color: #e0e0e0; border-color: #aaa; }
+        .question-button.disabled { background-color: #999; color: #777; cursor: not-allowed; border-color: #888; opacity: 0.6; }
 
-        /* --- Team Section --- */
-        #team-section {
-            margin-top: 40px;
-            text-align: center;
-        }
 
-        /* --- NEW: Question Modal --- */
+        /* --- Question Modal --- */
         #question-modal {
-            /* Hidden by default, shown by JS */
-            display: none; 
-            position: fixed; /* Sits on top of everything */
-            z-index: 100;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6); /* Dark overlay */
-            
-            /* Center the content */
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); display: flex; justify-content: center; align-items: center;
         }
         .modal-content {
-            background-color: #fff;
-            padding: 30px 40px;
-            border-radius: 10px;
-            width: 80%;
-            max-width: 700px;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            display: flex;
-            flex-direction: column;
-            gap: 20px; /* Space between elements */
+            background-color: #fff; padding: 30px 40px; border-radius: 10px; width: 80%; max-width: 700px; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.2); display: flex; flex-direction: column; gap: 20px;
         }
-        #question-text {
-            font-size: 2.2em;
-            font-weight: 500;
-            color: #333;
-            margin: 0;
-        }
-        #answer-text {
-            /* Hidden until "Show Answer" is clicked */
-            display: none; 
-            font-size: 1.8em;
-            color: #004a99;
-            font-weight: bold;
-            margin: 0;
-        }
+        #question-text { font-size: 2.2em; font-weight: 500; color: #333; margin: 0; }
+        #answer-text { display: none; font-size: 1.8em; color: #004a99; font-weight: bold; margin: 0; }
         
-        /* --- NEW: Modal Buttons --- */
         .modal-btn {
-            padding: 12px 20px;
-            font-size: 1.1em;
+            padding: 12px 20px; font-size: 1.1em; font-weight: bold; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.2s ease;
+        }
+        #show-answer-btn { background-color: #347ac9; color: white; }
+        #show-answer-btn:hover { background-color: #2a63a2; }
+        
+        #no-answer-btn {
+            background-color: #ccc;
+            color: #333;
+            display: none;
+        }
+        #no-answer-btn:hover { background-color: #bbb; }
+
+        /* --- Scoring Buttons --- */
+        #scoring-buttons {
+            display: none;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+            margin-top: 10px;
+        }
+        .team-scoring-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 0 10px;
+        }
+        .scoring-team-name {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        .scoring-btn {
+            padding: 10px 15px;
+            font-size: 1em;
             font-weight: bold;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.2s ease;
+            margin-left: 10px;
+            min-width: 100px;
         }
-        #show-answer-btn {
-            background-color: #347ac9; /* Blue */
-            color: white;
-        }
-        #show-answer-btn:hover {
-            background-color: #2a63a2;
-        }
-        #close-modal-btn {
-            background-color: #ccc;
-            color: #333;
-            /* Hidden until answer is shown */
-            display: none; 
-        }
-        #close-modal-btn:hover {
-            background-color: #bbb;
-        }
-    </style>
-</head>
-<body>
-
-    <h1>My E-C-A Review Game</h1>
-    
-    <div id="game-board"></div>
-
-    <div id="team-section">
-        </div>
-
-    <div id="question-modal">
-        <div class="modal-content">
-            <p id="question-text">Here is the question?</p>
-            <p id="answer-text">Here is the answer!</p>
-            
-            <button id="show-answer-btn" class="modal-btn">Show Answer</button>
-            <button id="close-modal-btn" class="modal-btn">Close</button>
-            
-            </div>
-    </div>
-
-
-    <script>
-        // --- 1. PLACEHOLDER DATA ---
-        const allQuestions = [
-            // ... (Same data as before) ...
-            { topic: "Math 1c", chapter: "Ch 5", subchapter: "5.1 Functions", q: "What is f(x) = 2x + 2 for f(2)?", a: "f(2) = 6", level: "E" },
-            { topic: "Math 1c", chapter: "Ch 5", subchapter: "5.1 Functions", q: "A second E-level question for 5.1", a: "The answer", level: "E" },
-            { topic: "Math 1c", chapter: "Ch 5", subchapter: "5.1 Functions", q: "A third E-level question for 5.1", a: "The answer", level: "E" },
-            { topic: "Math 1c", chapter: "Ch 5", subchapter: "5.1 Functions", q: "What is a 'domain'?", a: "All possible x-values", level: "C" },
-            { topic: "Math 1c", chapter: "Ch 5", subchapter: "5.1 Functions", q: "What is a 'range'?", a: "All possible y-values", level: "C" },
-            { topic: "Math 1c", chapter: "Ch 5", subchapter: "5.1 Functions", q: "Given f(x) = x^2, describe the transformation of f(x-2)+1", a: "2 units right, 1 unit up", level: "A" },
-            { topic: "Math 1c", chapter: "Ch 5", subchapter: "5.2 Algebra", q: "Solve 2x = 8", a: "x = 4", level: "E" },
-            { topic: "Math 1c", chapter: "Ch 5", subchapter: "5.2 Algebra", q: "Solve 3x + 1 = 10", a: "x = 3", level: "E" },
-            { topic: "Math 1c", chapter: "Ch 5", subchapter: "5.2 Algebra", q: "Factor x^2 - 4", a: "(x-2)(x+2)", level: "C" },
-            { topic: "Math 1c", chapter: "Ch 5", subchapter: "5.2 Algebra", q: "Solve x^2 + 5x + 6 = 0", a: "x = -2 or x = -3", level: "A" },
-            { topic: "Math 1c", chapter: "Ch 5", subchapter: "5.2 Algebra", q: "What is the quadratic formula?", a: "x = [-b ± sqrt(b^2-4ac)] / 2a", level: "A" },
-            { topic: "Math 1c", chapter: "Ch 5", subchapter: "5.3 Geometry", q: "Area of a triangle?", a: "base * height / 2", level: "E" },
-            { topic: "Math 1c", chapter: "Ch 5", subchapter: "5.3 Geometry", q: "Pythagorean theorem?", a: "a^2 + b^2 = c^2", level: "C" },
-        ];
-
-        // --- 2. GAME CONFIGURATION ---
-        const categoriesForThisGame = [
-            "5.1 Functions",
-            "5.2 Algebra",
-            "5.3 Geometry"
-        ];
-        
-        const points = { E: 1, C: 3, A: 5 };
-        
-        // --- NEW: Global variable to track the current button ---
-        let currentButton = null;
-
-        // --- 3. BOARD-BUILDING FUNCTIONS ---
-        function buildBoard() {
-            // ... (Same as before) ...
-            const gameBoard = document.getElementById('game-board');
-            gameBoard.innerHTML = ''; 
-
-            categoriesForThisGame.forEach(categoryName => {
-                const column = document.createElement('div');
-                column.classList.add('category-column');
-                
-                const header = document.createElement('div');
-                header.classList.add('category-header');
-                header.textContent = categoryName;
-                column.appendChild(header);
-
-                const categoryQuestions = allQuestions.filter(q => q.subchapter === categoryName);
-                const aQuestions = categoryQuestions.filter(q => q.level === 'A');
-                const cQuestions = categoryQuestions.filter(q => q.level === 'C');
-                const eQuestions = categoryQuestions.filter(q => q.level === 'E');
-                
-                column.appendChild( createBucket(aQuestions, 'A', '🌶🌶🌶', 'level-a') );
-                column.appendChild( createBucket(cQuestions, 'C', '🌶🌶', 'level-c') );
-                column.appendChild( createBucket(eQuestions, 'E', '🌶', 'level-e') );
-
-                gameBoard.appendChild(column);
-            });
-        }
-
-        function createBucket(questions, level, icon, cssClass) {
-            // ... (Same as before, with one addition) ...
-            const bucket = document.createElement('div');
-            bucket.classList.add('level-bucket', cssClass);
-            const bucketHeader = document.createElement('div');
-            bucketHeader.classList.add('level-header');
-            bucketHeader.textContent = icon;
-            bucket.appendChild(bucketHeader);
-            const grid = document.createElement('div');
-            grid.classList.add('question-grid');
-
-            questions.forEach((question, index) => {
-                const button = document.createElement('button');
-                button.classList.add('question-button');
-                button.textContent = index + 1; 
-
-                button.dataset.question = question.q;
-                button.dataset.answer = question.a;
-                button.dataset.points = points[level];
-                
-                // --- THIS IS THE NEW LINE ---
-                // Add the click listener to THIS button
-                button.addEventListener('click', handleQuestionClick);
-                
-                grid.appendChild(button);
-            });
-
-            bucket.appendChild(grid);
-            return bucket;
-        }
-
-        // --- 4. NEW: MODAL AND CLICK-HANDLING FUNCTIONS ---
-        
-        /**
-         * Runs when a question button is clicked
-         */
-        function handleQuestionClick(event) {
-            // Get the button that was clicked
-            currentButton = event.target;
-
-            // 1. Get data from the button's 'dataset'
-            const q = currentButton.dataset.question;
-            const a = currentButton.dataset.answer;
-            // We'll use points later
-            // const pts = currentButton.dataset.points;
-
-            // 2. Populate the modal
-            document.getElementById('question-text').textContent = q;
-            document.getElementById('answer-text').textContent = a;
-
-            // 3. Reset the modal's state
-            // Hide the answer and the 'Close' button
-            document.getElementById('answer-text').style.display = 'none';
-            document.getElementById('close-modal-btn').style.display = 'none';
-            
-            // Show the 'Show Answer' button
-            document.getElementById('show-answer-btn').style.display = 'block';
-
-            // 4. Show the modal
-            // We change the display from 'none' to 'flex' (as styled in our CSS)
-            document.getElementById('question-modal').style.display = 'flex';
-        }
-        
-        /**
-         * Runs when "Show Answer" is clicked
-         */
-        function showAnswer() {
-            // Show the answer text
-            document.getElementById('answer-text').style.display = 'block';
-            
-            // Hide this button
-            document.getElementById('show-answer-btn').style.display = 'none';
-            
-            // Show the "Close" button
-            document.getElementById('close-modal-btn').style.display = 'block';
-            
-            // In the future, we will show the "Correct/Incorrect" team buttons here
-        }
-        
-        /**
-         * Runs when "Close" is clicked
-         */
-        function closeModal() {
-            // 1. Hide the modal
-            document.getElementById('question-modal').style.display = 'none';
-
-            // 2. Disable the question button on the board
-            if (currentButton) {
-                currentButton.classList.add('disabled');
-                currentButton.disabled = true; // Prevents re-clicking
-                currentButton = null; // Clear the variable
-            }
-        }
-        
-        // --- 5. INITIALIZE THE GAME ---
-        
-        // Run the board-building function
-        buildBoard();
-        
-        // --- NEW: Add listeners for the modal buttons ---
-        document.getElementById('show-answer-btn').addEventListener('click', showAnswer);
-        document.getElementById('close-modal-btn').addEventListener('click', closeModal);
-
-    </script>
-</body>
-</html>
+        .correct-btn { background-color: #34c95a; color: white; }
+        .correct-btn:hover { background-color: #2aaa4c; }
+        .incorrect-btn { background-
